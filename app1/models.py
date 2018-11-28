@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from lib.orm import ModelMixin
 
 from django.db import models
 import datetime
@@ -34,8 +35,20 @@ class User(models.Model):
             self._profile = _profile
         return self._profile
 
+    def _to_dict(self):
+        return {
+            'id': self.id,
+            'nicname': self.nicname,
+            'phonenum': self.phonenum,
+            'sex': self.sex,
+            'avatar': self.avatar,
+            'location': self.location,
+            'age': self.age,
 
-class Profies(models.Model):
+        }
+
+
+class Profies(models.Model,ModelMixin):
     SEX = (
         ('男', '男'),
         ('女', '女'),
